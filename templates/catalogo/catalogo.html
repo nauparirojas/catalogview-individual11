@@ -1,0 +1,27 @@
+{% extends "base.html" %} {% block title %}Catálogo de Productos{% endblock %}
+{% block content %}
+<div style="text-align: center; margin-bottom: 2rem">
+  <h2>{{ titulo|default:"Listado de Productos" }}</h2>
+  <p>
+    {{ mensaje|default:"Explora nuestro catálogo tecnológico disponible." }}
+  </p>
+</div>
+
+<div class="grid">
+  {% for producto in object_list %}
+  <div class="card">
+    <h3>{{ producto.nombre }}</h3>
+    <p>Precio: S/ {{ producto.precio }}</p>
+    {% if producto.stock == 0 %}
+    <p style="color: red">Agotado</p>
+    {% else %}
+    <p>Stock: {{ producto.stock }}</p>
+    {% endif %}
+  </div>
+  {% empty %}
+  <p style="grid-column: 1 / -1; text-align: center">
+    No hay productos disponibles en este momento.
+  </p>
+  {% endfor %}
+</div>
+{% endblock %}
